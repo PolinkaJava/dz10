@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Sistema {
     String name;
     double r;
@@ -12,13 +14,17 @@ public class Sistema {
         return name + "," + r;
 
     }
-    public boolean equals(Object x){
-        return (this == x);
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Sistema sistema = (Sistema) o;
+        return Double.compare(r, sistema.r) == 0 && Objects.equals(name, sistema.name);
     }
-    public int hasCode(String name, double r){
-        return hasCode(this.name, this.r);
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, r);
     }
-
-
 }
